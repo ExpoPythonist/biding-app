@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+<section class="section">
+    <section class="container">
+        <div class="card">
+            <div class="card-content">
+                <h4>Your bid summary</h4>
+                <table class="table responsive-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bid status</th>
+                            <th>Company Name</th>
+                            <th>Timestamp</th>
+                            <th>$ Bidded</th>
+                            <th>no. Shares</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for b in bids %}
+                            <tr>
+                                <td>{{ b.id }}</td>
+                                <td>{% if b.confirmed %}<span class="chip">Confirmed</span>{%else%} <span class="chip indigo darken-2 white-text">Unconfirmed</span>       {%endif%}</td>
+                                <td>{{ b.placement.placement_company }}</td>
+                                <td>{{ b.placementbid_created }}</td>
+                                <td>{{ b.offer}}</td>
+                                <td>{{ b.shares}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{% url 'app:confirm-bids' %}" style="margin-top: 1rem;" class="btn waves-light waves-effect pink">Confirm Bids</a>
+            </div>
+        </div>
+
+    </section>
+</section>
+
+{% include 'footer.html' %}
+{% endblock content %}

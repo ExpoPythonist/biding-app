@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+              
+{% load static %}
+
+<section class="section">
+    <section class="container">
+        <section class="row">
+            <div class="col l3 s12">
+                <div class="card">
+                    <div class="card-content center">
+                        <p class="chip">Registered Users</p>
+                        <h4 id="total_users"></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                <div class="card">
+                        <div class="card-content center">
+                                <p class="chip">Total Companies</p>
+                                <h4 id="total_companies"></h4>
+                            </div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                <div class="card">
+                        <div class="card-content center">
+                                <p class="chip">Total Offers ($)</p>
+                                <h4><span id="total_offers"></span><span>K</span></h4>
+                            </div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                    <div class="card">
+                    <div class="card-content center">
+                            <p class="chip">Total Placements</p>
+                            <h4 id="total_placements"></h4>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section class="row">
+            <div class="col l12 s12">
+                <div class="card">
+                    <div class="card-content center">
+                            <h5>Top 5 placements by $</h5>
+                            <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+{% include 'footer.html' %}
+
+<script>
+// Number Incrementer function 
+// from https://stackoverflow.com/questions/16994662/count-animation-from-number-a-to-b
+function animateValue(id, start, end, duration) {
+    var range = end - start;
+    var current = start;
+    var increment;
+    var increment = end > start? 1 : -1;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var obj = document.getElementById(id);
+    var timer = setInterval(function() {
+        current += increment;
+        obj.innerText = current;
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
+animateValue("total_companies", 0, {{ total_companies }}, 1750);
+animateValue("total_placements", 0, {{ total_placements }}, 1750);
+animateValue("total_users", 0, {{ total_users }}, 1750);
+animateValue("total_offers", 0, {{ total_offers }}, 500);
+</script>
+<script>
+        // Chart.js code
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: {{ top_5_offer_names|safe }},
+                datasets: [{
+                    label: '# of offers',
+                    data:{{ top_5_offer_values|safe }},
+                    backgroundColor: 'rgba(48, 63, 159, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {display:false},
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 5
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {display:true,  color:'#F5F5F5'},
+                        ticks: {
+                            beginAtZero: true,
+                            maxTicksLimit: 6
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+
+{% endblock content %}

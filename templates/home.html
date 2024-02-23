@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %} {% include 'nav.html' %} {% load static %}
+
+    <section class="section">
+        <section class="container">
+            {% if user.is_authenticated == False %}
+                <div class="card z-depth-2">
+                    <div class="card-content">
+                        <h5>Notice</h5>
+                        <p class="custom-font-1">You must have a registered account and be logged in, in order to view
+                            and place bids within our marketplace.</p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card z-depth-2">
+                <div class="card-content">
+
+                    <h5>The Marketplace</h5>
+
+                    <p class="custom-font-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus ullam, odit
+                        iure incidunt inventore praesentium consectetur in animi rerum labore ab esse ex deleniti
+                        deserunt quaerat sapiente sunt quis a?</p>
+                    <a href="{% url 'app:placements' %}" class="btn waves-effect waves-light pink"
+                       style="margin-top: 1rem;">
+                        <i class="material-icons left">store</i>visit marketplace</a>
+                    <img class="responsive-img fade-in" src="{% static 'test.jpg' %}" alt="">
+                </div>
+            </div>
+
+
+            <div class="card z-depth-2">
+                <div class="card-content">
+                    <h5>
+                        News
+                    </h5>
+                    <p class="custom-font-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum culpa neque
+                        rerum sit maiores blanditiis et, dolorem labore, architecto harum explicabo optio nemo quo aut.
+                        Pariatur cum laboriosam id vel.</p>
+                    excepteur. Minim duis nostrud ex enim laboris minim irure dolore dolor aute occaecat dolor. Cillum
+                    do labore dolor consectetur fugiat enim voluptate. Sunt esse commodo laboris ut ipsum tempor nisi
+                    amet id anim aliqua aliquip fugiat.</p>
+                    <img class="responsive-img fade-in"
+                         src="https://live.staticflickr.com/1917/43062930690_1a7e7f7b4e_k.jpg"
+                         alt="franck-v-620922-unsplash"/>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    {% include 'footer.html' %} {% endblock content %}

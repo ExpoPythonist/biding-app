@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<main>
+    <section class="section">
+        <section class="container">
+            <div class="row">
+                <div class="col l12 s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <form action="" method="POST" class="form">
+                                {% csrf_token %}
+                                <h5>Registration page</h5>
+                                {{ form.as_p }}
+                                <div class="center">
+                                    <button style="margin-top: 1rem;" class="btn pink waves-effect waves-light" type="submit">Create Account</button>
+                                </div>
+                                <a href="{% url 'app:home' %}" style="margin-top: 1rem;">Go back to home page.</a>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+{% include 'footer.html' %} {% endblock content %}

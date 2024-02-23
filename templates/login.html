@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<main>
+    <section class="section">
+        <section class="container">
+            <div class="row">
+                <div class="col l8 m12 s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <form action="" method="POST" class="form">
+                                {% csrf_token %}
+                                <h5>Login page</h5>
+                                <div class="input-field">
+                                    <label for="" class="label">
+                                        Username
+                                    </label>
+                                    <input type="text" name="username">
+                                </div>
+                                <div class="input-field">
+                                    <label for="" class="label">
+                                        Password
+                                    </label>
+                                    <input type="password" name="password">
+                                </div>
+                                <div class="input-field">
+                                    <button style="margin-top: 1rem;" class="btn waves-effect waves-light pink" type="submit">Login</button>
+                                </div>
+                                <p>Don't have an account? click <a href="{% url 'app:register' %}" style="margin-top: 1rem;" type="a">here</a> to register.</p>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+</main>
+{% include 'footer.html' %} {% endblock content %}

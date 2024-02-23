@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+              
+{% load static %}
+
+<section class="section">
+    <section class="container">
+        
+            <div class="col s12">
+                    <div class="card">
+                            <div class="card-content">
+                                <h4>Welcome to the marketplace</h4>
+                                <p>Explore companies</p>
+                                <img src="{% static 'ishant-mishra-1349434-unsplash.jpg' %}" alt="" class="responsive-img fade-in">
+                            </div>
+                        </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                        <table class="table responsive-table">
+                                <thead>
+                                    <tr>
+                              
+                                        <th>Desc</th>
+                                        <th>Company</th>
+                                        <th>Added</th>
+                                        <th>Modified</th>
+                                        <th>View Details</th>
+                                    </tr>
+                                </thead>
+                
+                                <tbody>
+                                        {%for p in placements %}
+                                        <tr>
+                             
+                                            <td>{{ p.placement_title }}</td>
+                                            <td><span class="chip indigo white-text">{{ p.placement_company }}</span></td>
+                                            <td>{{ p.placement_created }}</td>
+                                            <td>{{ p.placement_modified }}</td>
+                                            <td><a href="{% url 'app:placement-detail' p.placement_slug %}" style="margin-top: 1rem;" class="btn pink waves-effect waves-light">View Details</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <ul class="pagination center">
+                                {% if placements.has_previous %}
+                                <li class="waves-effect"><a href="?page={{placements.previous_page_number}}">{{ placements.previous_page_number}}</a></li>
+                                {% endif %}
+
+                                <li class="active indigo"><a href="#!">{{placements.number}}</a></li>
+                               
+                                {% if placements.has_next %}
+                                <li class="waves-effect"><a href="?page={{placements.next_page_number}}">{{ placements.next_page_number}}</a></li>
+                                {% endif %}
+                            </ul>
+                                            
+                </div>
+            </div>
+
+    </section>
+</section>
+
+{% include 'footer.html' %}
+{% endblock content %}
